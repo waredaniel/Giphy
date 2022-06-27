@@ -4,16 +4,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 
 $(document).ready(function() {
-  $('#weatherLocation').click(function() {
-    const city = $('#location').val();
-    const zipcode = $('#zipcode').val();
-    $('#location').val("");
-    $('#zipcode').val("");
+  $('#getGifs').click(function() {
+    const keyword = $('#keyword').val();
+    console.log(keyword);
+    $('#keyword').val("");
+
 
     let request = new XMLHttpRequest();
-    const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.API_KEY}`;
-    const urlZipcode = `https://api.openweathermap.org/data/2.5/weather?q=${zipcode}&appid=${process.env.API_KEY}`
-
+    const url = `https://api.giphy.com/v1/gifs/search?api_key=${process.env.API_KEY}&q=${keyword}&limit=25&offset=0&rating=g&lang=en`;
     request.onreadystatechange = function() {
       if (this.readyState === 4 && this.status === 200) {
         const response = JSON.parse(this.responseText);
@@ -24,17 +22,13 @@ $(document).ready(function() {
     };
 
     request.open("GET", url, true);
-    request.open("GET",urlZipcode, true);
     request.send();
-  
+
     /* eslint-disable*/
     function getElements(response) {
-      $('.showHumidity').text(`The humidity in ${city} is ${response.main.humidity}%`);
-      $('.showTemp').text(`The temperature in Kelvins is ${response.main.temp} degrees.`);
-      let fahrenheitTemp= ((`${response.main.temp}` -273.15)*(9/5))+32
-      $('.showFahrenheit').text(`The temperature in Fahrenheit is ${fahrenheitTemp}`)
-      $('.showLon').text(`The longitude is ${response.coord.lon}`);
-      $('.showLat').text(`The latitude is ${response.coord.lat}`);
+      for (let i = 0; i < `${response.data.length}`; i++){
+      $('.showGifs').append(`<img src="${response.data[i].images.original.url}">`);
+      }
     };
     /* eslint-enable*/
   });

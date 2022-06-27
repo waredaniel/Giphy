@@ -1,27 +1,21 @@
 <html lang="en-US">
 <head>
-  <title>Weather</title>
+  <title>Giphy</title>
 </head>
 <body>
   <div class="container">
-    <h1>Get Weather Conditions From Anywhere!</h1>
+    <h1>Get Gifs from Giphy</h1>
     <div>
-      <label for="location">Enter a location:</label>
-      <input id="location" type="text">
+      <label for="keyword">Enter a Search Parameter:</label>
+      <input id="keyword" type="text">
     </div>
+  
     <br>
+    <button class="btn-success" id="getGifs">Get GIFs</button>
     <div>
-      <label for="zipcode">Enter a zipcode:</label>
-      <input id="zipcode" type="text">
+      <span class="showGifs"></span>
     </div>
-    <br>
-    <button class="btn-success" id="weatherLocation">Get Current Temperature and Humidity</button>
-    <div class="showErrors"></div>
-    <div class="showHumidity"></div>
-    <div class="showTemp"></div>
-    <div class="showFahrenheit"></div>
-    <div class="showLat"></div>
-    <div class="showLon"></div>
+
   </div>
 </body>
 </html>
